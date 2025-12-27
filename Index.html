@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenLayer Recap 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap');
+
+        body { 
+            background-color: #000; 
+            color: white; 
+            margin: 0; 
+            padding: 0;
+            overflow: hidden; 
+            font-family: 'Inter', sans-serif;
+            cursor: none; 
+        }
+
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: -2;
+            transition: opacity 3s ease;
+        }
+
+        #cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(34, 197, 94, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            transition: opacity 1s ease;
+        }
+
+        #custom-cursor {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url('logo.png'); 
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.9));
+            transition: opacity 1s ease;
+        }
+
+        .snow {
+            position: fixed;
+            top: -10vh;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.4;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh); }
+        }
+
+        h1, h2, h3 {
+            font-weight: 900 !important;
+            line-height: 0.85 !important;
+            letter-spacing: -0.05em !important;
+            text-transform: uppercase !important;
+            font-style: italic !important;
+            color: white !important;
+        }
+
+        .btn-green {
+            background: #22c55e;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .btn-green:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.6);
+            background: #28e06b;
+        }
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .social-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.08); }
+
+        .btn-next {
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+        }
+
+        .btn-next:hover { background: white; color: black; }
+
+        .hidden { display: none; }
+        
+        .fact-animate {
+            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mochi-float {
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(34, 197, 94, 0.2));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        #restart-btn {
+            opacity: 0;
+            transition: opacity 4s ease;
+            position: absolute;
+            bottom: 40px;
+            font-size: 11px;
+            letter-spacing: 0.5em;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+            cursor: pointer;
+            z-index: 100;
+        }
+        #restart-btn:hover { color: white; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop><source src="Music1.mp3" type="audio/mpeg"></audio>
+    <div class="grid-bg" id="grid"></div>
+    <div id="cursor-glow"></div>
+    <div id="custom-cursor"></div>
+
+    <section id="screen-1" class="h-screen flex flex-col justify-center items-center text-center px-4">
+        <h1 class="text-[60px] md:text-[140px]">GENLAYER<br>RECAP 2025</h1>
+        <div class="mt-12">
+            <button onclick="changeScreen(1, 2)" class="btn-green px-14 py-5 text-black font-black rounded-full text-2xl uppercase tracking-widest">Get Summary</button>
+        </div>
+    </section>
+
+    <section id="screen-2" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500">
+        <div class="max-w-6xl w-full flex flex-col md:flex-row items-center gap-12 fact-animate">
+            <div class="flex-1 text-left">
+                <div class="flex items-center gap-6 mb-8">
+                    <div class="h-[2px] w-16 bg-green-500"></div>
+                    <span class="text-green-500 font-mono text-2xl tracking-[0.2em]">GENLAYER ECOSYSTEM</span>
+                </div>
+                <h2 class="text-6xl md:text-[110px] mb-8 uppercase italic">RALLY</h2>
+                <p class="text-gray-400 text-xl md:text-3xl font-light leading-relaxed mb-12">
+                    The first major product built natively on GenLayer. A flagship innovation in <span class="text-white font-bold">AI InfoFi</span>, harnessing Intelligent Contracts to bridge the gap between AI and decentralized finance.
+                </p>
+                <button onclick="changeScreen(2, 3)" class="btn-next px-12 py-4 rounded-full font-bold">Meet the Mascot →</button>
+            </div>
+            <div class="flex-1 flex justify-center">
+                <img src="Rally.png" class="mochi-float w-[300px] md:w-[450px] object-contain">
+            </div>
+        </div>
+    </section>
+
+    <section id="screen-3" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500">
+        <div class="max-w-6xl w-full flex flex-col md:flex-row items-center gap-12 fact-animate">
+            <div class="flex-1 text-left">
+                <div class="flex items-center gap-6 mb-8">
+                    <div class="h-[2px] w-16 bg-green-500"></div>
+                    <span class="text-green-500 font-mono text-2xl tracking-[0.2em]">MASCOT</span>
+                </div>
+                <h2 class="text-6xl md:text-[110px] mb-8">MEET <br> MOCHI</h2>
+                <p class="text-gray-400 text-xl md:text-2xl font-light leading-relaxed max-w-md mb-12">
+                    Our official companion. Mochi joined the GenLayer family to represent the friendly side of the AI revolution.
+                </p>
+                <button onclick="changeScreen(3, 4)" class="btn-next px-12 py-4 rounded-full font-bold">Tech Milestones →</button>
+            </div>
+            <div class="flex-1 flex justify-center">
+                <img src="Mochi.png" class="mochi-float w-[300px] md:w-[500px] object-contain">
+            </div>
+        </div>
+    </section>
+
+    <section id="screen-4" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500">
+        <div class="max-w-5xl w-full fact-animate">
+            <div class="flex items-center gap-6 mb-8">
+                <div class="h-[2px] w-16 bg-green-500"></div>
+                <span class="text-green-500 font-mono text-2xl tracking-[0.2em]">2025</span>
+            </div>
+            <h2 class="text-6xl md:text-[120px] mb-12">ASIMOV <br> TESTNET</h2>
+            <p class="text-gray-400 text-xl md:text-3xl font-light leading-relaxed max-w-3xl mb-12">
+                The wait is over. GenLayer officially opened the Asimov Testnet, enabling the first on-chain contracts to talk to LLMs natively.
+            </p>
+            <button onclick="changeScreen(4, 5)" class="btn-next px-12 py-4 rounded-full font-bold">Partnerships →</button>
+        </div>
+    </section>
+
+    <section id="screen-5" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500">
+        <div class="max-w-5xl w-full fact-animate">
+            <div class="flex items-center gap-6 mb-8">
+                <div class="h-[2px] w-16 bg-green-500"></div>
+                <span class="text-green-500 font-mono text-2xl tracking-[0.2em]">ECOSYSTEM</span>
+            </div>
+            <h2 class="text-6xl md:text-[110px] mb-8 uppercase italic">EXPANDING <br> HORIZONS</h2>
+            <p class="text-gray-400 text-xl md:text-3xl font-light leading-relaxed mb-12 max-w-4xl">
+                2025 was a year of massive alliance. We’ve joined forces with industry leaders, innovative protocols, and AI pioneers to build a more connected future.
+            </p>
+            <p class="text-white text-xl md:text-2xl font-bold italic border-l-4 border-green-500 pl-6 py-2">
+                Dozens of new partners. One shared goal.
+            </p>
+            <div class="mt-12">
+                <button onclick="changeScreen(5, 6)" class="btn-next px-12 py-4 rounded-full font-bold">Community →</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="screen-6" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500">
+        <div class="max-w-5xl w-full fact-animate">
+            <div class="flex items-center gap-6 mb-8">
+                <div class="h-[2px] w-16 bg-green-500"></div>
+                <span class="text-green-500 font-mono text-2xl tracking-[0.2em]">GROWTH</span>
+            </div>
+            <h2 class="text-6xl md:text-[110px] mb-8 uppercase">STRONGER TOGETHER</h2>
+            <p class="text-gray-400 text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-3xl">
+                Our community hasn't just grown; it has evolved. We’ve become a global force of builders and believers, united by the vision of decentralized AI.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+                <a href="https://x.com/GenLayer" target="_blank" class="social-card flex items-center gap-8 p-8 rounded-2xl cursor-pointer">
+                    <svg class="w-16 h-16 fill-white" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                    <div><p class="text-5xl font-black italic">73.3K</p><p class="text-gray-500 text-xs uppercase tracking-widest mt-2">X Community</p></div>
+                </a>
+                <a href="https://discord.gg/cxw5tcU3sB" target="_blank" class="social-card flex items-center gap-8 p-8 rounded-2xl cursor-pointer">
+                    <svg class="w-16 h-16 fill-white" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.4,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,6.89-11.11,68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.24-16.14C129.5,50.28,124.27,26.51,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.07,65.69,84.69,65.69Z"/></svg>
+                    <div><p class="text-5xl font-black italic">85.1K</p><p class="text-gray-500 text-xs uppercase tracking-widest mt-2">Discord Members</p></div>
+                </a>
+            </div>
+            <button onclick="changeScreen(6, 7)" class="btn-next px-12 py-4 rounded-full font-bold">The Future →</button>
+        </div>
+    </section>
+
+    <section id="screen-7" class="fixed inset-0 hidden z-50 flex flex-col justify-center items-center px-6 transition-all duration-500 text-center">
+        <div id="final-content" class="max-w-5xl w-full fact-animate transition-opacity duration-[2s]">
+            <h2 class="text-5xl md:text-[110px] mb-8 italic">2025 WAS JUST <br> THE BEGINNING</h2>
+            <div class="space-y-6 mb-16">
+                <p class="text-gray-400 text-xl md:text-3xl font-light leading-relaxed">
+                    We’ve walked a long path: from the first Intelligent Contracts <br> 
+                    to a global network of believers. 
+                </p>
+                <p class="text-white text-2xl md:text-4xl font-bold italic tracking-tight">
+                    We have achieved much, but the true frontier lies ahead.
+                </p>
+                <p class="text-gray-500 text-lg md:text-xl uppercase tracking-[0.3em]">
+                    Brace yourself. 2026 is where the magic becomes reality.
+                </p>
+            </div>
+            <div class="mt-8">
+                <button onclick="startTheFuture()" class="btn-green px-12 py-5 text-black font-black rounded-full uppercase tracking-widest text-2xl">
+                    Enter 2026
+                </button>
+            </div>
+        </div>
+        <div id="restart-btn" onclick="location.reload()">Back to start</div>
+    </section>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const glow = document.getElementById('cursor-glow');
+        const audio = document.getElementById('bgMusic');
+        let musicStarted = false;
+
+        function createSnow(count = 60) {
+            for(let i = 0; i < count; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snow';
+                const size = Math.random() * 3 + 1 + 'px';
+                flake.style.width = size; flake.style.height = size;
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                flake.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(flake);
+            }
+        }
+        createSnow(60);
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            if (!musicStarted) { audio.play().then(() => musicStarted = true).catch(() => {}); }
+        });
+
+        function changeScreen(from, to) {
+            const current = document.getElementById(`screen-${from}`);
+            const next = document.getElementById(`screen-${to}`);
+            current.style.opacity = "0";
+            setTimeout(() => {
+                current.classList.add('hidden');
+                next.classList.remove('hidden');
+                next.style.opacity = "1";
+            }, 500);
+        }
+
+        function startTheFuture() {
+            const finalContent = document.getElementById('final-content');
+            finalContent.style.opacity = '0';
+            finalContent.style.pointerEvents = 'none';
+            document.getElementById('grid').style.opacity = '0';
+            cursor.style.opacity = '0';
+            glow.style.opacity = '0';
+
+            createSnow(250);
+            const allFlakes = document.querySelectorAll('.snow');
+            allFlakes.forEach(f => {
+                f.style.opacity = '0.9';
+                let currentDur = parseFloat(f.style.animationDuration) || 3;
+                f.style.animationDuration = (currentDur / 2.5) + 's';
+            });
+
+            setTimeout(() => {
+                document.getElementById('restart-btn').style.opacity = '1';
+                document.body.style.cursor = 'default';
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
